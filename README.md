@@ -25,7 +25,7 @@ Before proceeding, ensure you have the following dependencies in place:
 ### Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:kfirosb/gloat.git
 cd gloat
 ```
 
