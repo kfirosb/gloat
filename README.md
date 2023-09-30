@@ -31,7 +31,7 @@ cd gloat
 
 ### Deploy Fluent-Bit
 
-1. Navigate to the `gloat/fluent-bit` directory.
+1. Navigate to the `fluent-bit` directory.
 
 2. Edit the file `fluent-bit-pv.yaml`. Modify the "path/for/output" and "path/for/logs" with your local paths.
 
@@ -49,7 +49,7 @@ cd gloat
 
 ### Deploy Tsunami
 
-1. Navigate to the `gloat/tsunami/tsunami-docker-image-build` directory.
+1. Navigate to the `tsunami/tsunami-docker-image-build` directory.
 
 2. Build the Tsunami Docker image:
    ```bash
@@ -58,11 +58,11 @@ cd gloat
 
 3. Tag and push the Tsunami image to your image registry.
 
-4. In the file `gloat/tsunami/tsunami-helm-chart/templates/tsunami-data-pv.yaml`, update the path to the location where you plan to place the `ip_list.txt` file for server IP list configuration.
+4. In the file `tsunami/tsunami-helm-chart/templates/tsunami-data-pv.yaml`, update the path to the location where you plan to place the `ip_list.txt` file for server IP list configuration.
 
-5. In the file `gloat/tsunami/tsunami-helm-chart/templates/tsunami-logs-pv.yaml`, update the path to match the mount location for the Fluent-Bit logs configured in step 3 of the Fluent-Bit deployment.
+5. In the file `tsunami/tsunami-helm-chart/templates/tsunami-logs-pv.yaml`, update the path to match the mount location for the Fluent-Bit logs configured in step 3 of the Fluent-Bit deployment.
 
-6. Navigate to the `gloat/tsunami` directory.
+6. Navigate to the `tsunami` directory.
 
 7. Create a Tsunami namespace:
    ```bash
@@ -78,7 +78,7 @@ cd gloat
 
 ### Tsunami
 
-Tsunami includes a script located at `gloat/tsunami/tsunami-docker-image-build/scripts/start.sh`. This script reads the server IP list file and runs Tsunami scans for each IP address. It takes the JSON Tsunami report, condenses it into a one-liner, and renames it with the server IP and timestamp.
+Tsunami includes a script located at `tsunami/tsunami-docker-image-build/scripts/start.sh`. This script reads the server IP list file and runs Tsunami scans for each IP address. It takes the JSON Tsunami report, condenses it into a one-liner, and renames it with the server IP and timestamp.
 
 ```bash
 #!/bin/bash
