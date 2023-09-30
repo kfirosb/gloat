@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: tsunami-scheduled-scan
+  namespace: tsunami  # Specify the namespace here
+spec:
+  schedule: "*/25 * * * *"  # Runs daily at 6 am Israel time (UTC 3:00)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: tsunami-service-account
+          restartPolicy: OnFailure
+          volumes:
+            - name: tsunami-data
+              persistentVolumeClaim:
+                claimName: data-pvc
+            - name: tsunami-logs
+              persistentVolumeClaim:
+                claimName: logs-pvc
+          containers:
+            - name: tsunami-scanner
+              image: tsunami:latest
+              imagePullPolicy: Never
+              volumeMounts:
+                - name: tsunami-data
+                  mountPath: /mnt/tsunami-data
+                - name: tsunami-logs
+                  mountPath: /mnt/tsunami-logs

@@ -1,0 +1,30 @@
+#pv.yaml
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data-pv
+  namespace: tsunami
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadOnlyMany
+  hostPath:
+    path: path/to/data
+
+#pvc.yaml
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-pvc
+  namespace: tsunami
+spec:
+  volumeName: data-pv
+  accessModes:
+    - ReadOnlyMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 5Gi

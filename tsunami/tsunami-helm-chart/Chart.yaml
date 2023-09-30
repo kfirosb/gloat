@@ -1,0 +1,6 @@
+apiVersion: v2
+name: tsunami-scanner
+description: A Helm chart to deploy Tsunami scanner with scheduled scans
+version: 0.1.0
+namespace: tsunami  # Specify the namespace here
+
