@@ -58,18 +58,29 @@ cd gloat
 
 3. Tag and push the Tsunami image to your image registry.
 
-4. In the file `tsunami/tsunami-helm-chart/templates/tsunami-data-pv.yaml`, update the path to the location where you plan to place the `ip_list.txt` file for server IP list configuration.
+4. Modify the Image Location in the Cron Job Configuration:
+Open the tsunami-helm-chart/templates/tsunami-cronjob.yaml file and locate the image field. Replace the image location with the location where you pushed the Tsunami image in step 3.
 
-5. In the file `tsunami/tsunami-helm-chart/templates/tsunami-logs-pv.yaml`, update the path to match the mount location for the Fluent-Bit logs configured in step 3 of the Fluent-Bit deployment.
+5. Change the Scheduled Time in the Cron Job:
+To run the Cron Job when you want, modify the Cron Job schedule. In the `tsunami-helm-chart/templates/tsunami-cronjob.yaml` file, locate the schedule field and set it to:
 
-6. Navigate to the `tsunami` directory.
+```yaml
+schedule: "0 3 * * *"
+```
+This Cron Job expression represents "0 minutes past 6 AM every day at 6 AM Israel time."
 
-7. Create a Tsunami namespace:
+6. In the file `tsunami/tsunami-helm-chart/templates/tsunami-data-pv.yaml`, update the path to the location where you plan to place the `ip_list.txt` file for server IP list configuration.
+
+7. In the file `tsunami/tsunami-helm-chart/templates/tsunami-logs-pv.yaml`, update the path to match the mount location for the Fluent-Bit logs configured in step 3 of the Fluent-Bit deployment.
+
+8. Navigate to the `tsunami` directory.
+
+8. Create a Tsunami namespace:
    ```bash
    kubectl create ns tsunami
    ```
 
-8. Install Tsunami using Helm:
+9. Install Tsunami using Helm:
    ```bash
    helm upgrade --install -n tsunami tsunami-scanner ./tsunami-helm-chart
    ```
